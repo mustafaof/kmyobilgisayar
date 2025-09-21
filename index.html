@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kocaeli MYO Bilgisayar Teknolojileri</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #2d3748;
+            scroll-behavior: smooth;
+        }
+        header {
+            background-image: linear-gradient(to right, #4a90e2, #50c4f2);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem 2rem;
+        }
+        h1, h2 {
+            font-weight: 700;
+        }
+        h1 {
+            font-size: 4rem;
+            color: #3182ce;
+        }
+        h2 {
+            font-size: 2.5rem;
+            color: #4a5568;
+            margin-bottom: 2rem;
+        }
+        .btn-nav {
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .btn-nav:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+        }
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 4rem;
+            color: #3182ce;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+        .table-container {
+            overflow-x: auto;
+            width: 100%;
+        }
+        .course-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #f7fafc;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        .course-table th, .course-table td {
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+        }
+        .course-table th {
+            background-color: #4a5568;
+            color: #ffffff;
+            font-weight: 700;
+        }
+        .course-table td {
+            background-color: #ffffff;
+            color: #4a5568;
+        }
+        /* Responsive menü stilleri */
+        .main-nav {
+            display: flex;
+        }
+        .mobile-menu-btn {
+            display: none;
+            cursor: pointer;
+            color: #ffffff;
+            font-size: 2rem;
+        }
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-image: linear-gradient(to right, #4a90e2, #50c4f2);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: max-height 0.3s ease-out;
+            max-height: 0;
+            overflow: hidden;
+        }
+        .mobile-menu.active {
+            max-height: 500px; /* Menü içeriğine göre ayarlanabilir */
+        }
+        .mobile-menu a {
+            display: block;
+            padding: 1rem 2rem;
+            text-align: center;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .main-nav {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+            .mobile-menu.active {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <header class="shadow-lg">
+        <nav class="container mx-auto flex justify-between items-center py-4 relative">
+            <a href="#" class="text-2xl font-bold text-white">KOÜ BT</a>
+            <ul class="main-nav space-x-4 md:flex hidden">
+                <li><a href="#tanitim" class="btn-nav">Tanıtım</a></li>
+                <li><a href="#programlar" class="btn-nav">Programlar</a></li>
+                <li><a href="#dersler" class="btn-nav">Dersler</a></li>
+                <li><a href="#kadro" class="btn-nav">Kadro</a></li>
+                <li><a href="#laboratuvarlar" class="btn-nav">Laboratuvarlar</a></li>
+                <li><a href="#iletisim" class="btn-nav">İletişim</a></li>
+            </ul>
+            <div class="mobile-menu-btn" onclick="toggleMenu()">☰</div>
+            <div id="mobile-menu" class="mobile-menu">
+                <a href="#tanitim" onclick="toggleMenu()">Tanıtım</a>
+                <a href="#programlar" onclick="toggleMenu()">Programlar</a>
+                <a href="#dersler" onclick="toggleMenu()">Dersler</a>
+                <a href="#kadro" onclick="toggleMenu()">Kadro</a>
+                <a href="#laboratuvarlar" onclick="toggleMenu()">Laboratuvarlar</a>
+                <a href="#iletisim" onclick="toggleMenu()">İletişim</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Tanıtım Bölümü -->
+        <section id="tanitim" class="bg-gray-100 text-center">
+            <h1 class="text-6xl font-extrabold mb-4">Kocaeli Meslek Yüksekokulu</h1>
+            <h2 class="text-4xl font-semibold mb-8 text-gray-600">Bilgisayar Teknolojileri Bölümü</h2>
+            <p class="max-w-3xl text-xl text-gray-500">
+                Bilgisayar Teknolojileri Bölümü, endüstrinin ihtiyaç duyduğu donanım ve yazılım projelerinde çalışabilecek nitelikli ara elemanlar yetiştirmeyi amaçlar. Mezunlarımız, ülkemiz işgücüne katkıda bulunacak bilgi ve becerilerle donanmıştır.
+            </p>
+            <div class="mt-12 w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                <div class="card">
+                    <h3 class="text-2xl font-bold text-indigo-600 mb-4 flex items-center"><span class="mr-2 text-3xl">💡</span> Amaç</h3>
+                    <p class="text-gray-600">Donanım, yazılım, sistem ve ağ konularında uzmanlaşmış, araştırma ve geliştirme yapabilecek teknikerler yetiştirmek.</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-2xl font-bold text-purple-600 mb-4 flex items-center"><span class="mr-2 text-3xl">🚀</span> Misyon</h3>
+                    <p class="text-gray-600">Teorik ve pratik eğitimi birleştirerek sanayinin nitelikli eleman ihtiyacını karşılamak ve toplumsal gelişime katkıda bulunmak.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bölüm Programları Bölümü -->
+        <section id="programlar" class="bg-gray-200">
+            <h2 class="section-title">Bölümümüz Programları</h2>
+            <div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
+                <div class="card">
+                    <div class="text-5xl mb-4 text-green-600">🖥️</div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Bilgisayar Programcılığı</h3>
+                    <p class="text-gray-600">Sektörde teknikerlik düzeyinde uzmanlaşmak isteyenler için örgün eğitim.</p>
+                </div>
+                <div class="card">
+                    <div class="text-5xl mb-4 text-yellow-600">🌐</div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Bilgisayar Programcılığı (Uzaktan Eğitim)</h3>
+                    <p class="text-gray-600">Esnek bir eğitim modeliyle geleceğe hazırlanmak isteyenler için ideal.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ders Listeleri Bölümü -->
+        <section id="dersler" class="bg-gray-100">
+            <h2 class="section-title">Ders Listeleri</h2>
+            <div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="card">
+                    <h3 class="text-2xl font-bold text-teal-600 mb-4">Bilgisayar Programcılığı (Örgün)</h3>
+                    <div class="space-y-8">
+                        <div>
+                            <h4 class="text-xl font-semibold mb-2">1. Yarıyıl</h4>
+                            <div class="table-container">
+                                <table class="course-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Ders Kodu</th>
+                                            <th>Ders Adı</th>
+                                            <th>AKTS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>AIT101</td><td>Atatürk İlkeleri ve İnkilap Tarihi I (UE)</td><td>2</td></tr>
+                                        <tr><td>YDB105</td><td>İngilizce I (UE)</td><td>2</td></tr>
+                                        <tr><td>TDB107</td><td>Türk Dili I (UE)</td><td>2</td></tr>
+                                        <tr><td>OMP109</td><td>Matematik I</td><td>4</td></tr>
+                                        <tr><td>BPP115</td><td>Algoritmalar</td><td>6</td></tr>
+                                        <tr><td>BPP111</td><td>Entegre Ofis</td><td>5</td></tr>
+                                        <tr><td>BPP113</td><td>Programlamaya Giriş</td><td>5</td></tr>
+                                        <tr><td></td><td>Seçmeli Dersler</td><td>4</td></tr>
+                                        <tr class="font-bold text-gray-800"><td></td><td>AKTS Toplamı</td><td>30</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-2">2. Yarıyıl</h4>
+                            <div class="table-container">
+                                <table class="course-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Ders Kodu</th>
+                                            <th>Ders Adı</th>
+                                            <th>AKTS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>AIT102</td><td>Atatürk İlkeleri ve İnkilap Tarihi II (UE)</td><td>2</td></tr>
+                                        <tr><td>YDB106</td><td>İngilizce II (UE)</td><td>2</td></tr>
+                                        <tr><td>KYP102</td><td>Kariyer Planlama</td><td>0</td></tr>
+                                        <tr><td>TDB108</td><td>Türk Dili II (UE)</td><td>2</td></tr>
+                                        <tr><td>OMP110</td><td>Matematik II</td><td>4</td></tr>
+                                        <tr><td>BPP112</td><td>Grafik Animasyon - I</td><td>5</td></tr>
+                                        <tr><td>BPP116</td><td>Temel Bilgisayar Donanımı</td><td>5</td></tr>
+                                        <tr><td>BPP114</td><td>Veri Yapıları ve Programlama</td><td>6</td></tr>
+                                        <tr><td></td><td>Seçmeli Dersler</td><td>4</td></tr>
+                                        <tr class="font-bold text-gray-800"><td></td><td>AKTS Toplamı</td><td>30</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-2">3. Yarıyıl</h4>
+                            <div class="table-container">
+                                <table class="course-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Ders Kodu</th>
+                                            <th>Ders Adı</th>
+                                            <th>AKTS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>EDO299</td><td>Staj (Yıllık Ders 3+3 AKTS)</td><td>3</td></tr>
+                                        <tr><td>BPP201</td><td>Grafik Animasyon - II</td><td>3</td></tr>
+                                        <tr><td>BPP209</td><td>İnternet Programcılığı - I</td><td>4</td></tr>
+                                        <tr><td>BPP207</td><td>Programlama Dilleri - I</td><td>4</td></tr>
+                                        <tr><td>BPP211</td><td>Veri Tabanı Yönetim Sistemleri - I</td><td>4</td></tr>
+                                        <tr><td></td><td>Seçmeli Dersler</td><td>12</td></tr>
+                                        <tr class="font-bold text-gray-800"><td></td><td>AKTS Toplamı</td><td>30</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-2">4. Yarıyıl</h4>
+                            <div class="table-container">
+                                <table class="course-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Ders Kodu</th>
+                                            <th>Ders Adı</th>
+                                            <th>AKTS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>OMP202</td><td>Proje</td><td>2</td></tr>
+                                        <tr><td>BPP206</td><td>İnternet Programcılığı - II</td><td>5</td></tr>
+                                        <tr><td>BPP210</td><td>Programlama Dilleri - II</td><td>4</td></tr>
+                                        <tr><td>BPP212</td><td>Veri Tabanı Yönetim Sistemleri - II</td><td>4</td></tr>
+                                        <tr><td></td><td>Seçmeli Dersler</td><td>12</td></tr>
+                                        <tr class="font-bold text-gray-800"><td></td><td>AKTS Toplamı</td><td>30</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="text-2xl font-bold text-orange-600 mb-4">Bilgisayar Programcılığı (Uzaktan)</h3>
+                    <div class="space-y-8">
+                        <div>
+                            <h4 class="text-xl font-semibold mb-2">1. Yarıyıl</h4>
+                            <div class="table-container">
+                                <table class="course-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Ders Kodu</th>
+                                            <th>Ders Adı</th>
+                                            <th>AKTS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>AIT101</td><td>Atatürk İlkeleri ve İnkilap Tarihi I (UE)</td><td>2</td></tr>
+                                        <tr><td>YDB105</td><td>İngilizce I (UE)</td><td>2</td></tr>
+                                        <tr><td>TDB107</td><td>Türk Dili I (UE)</td><td>2</td></tr>
+                                        <tr><td>BUE111</td><td>Entegre Ofis</td><td>5</td></tr>
+                                        <tr><td>BUE115</td><td>Algoritmalar</td><td>6</td></tr>
+                                        <tr><td>BUE109</td><td>Matematik - I</td><td>4</td></tr>
+                                        <tr><td>BUE113</td><td>Programlamaya Giriş</td><td>5</td></tr>
+                                        <tr><td></td><td>Seçmeli Dersler</td><td>4</td></tr>
+                                        <tr class="font-bold text-gray-800"><td></td><td>AKTS Toplamı</td><td>30</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-2">2. Yarıyıl</h4>
+                            <div class="table-container">
+                                <table class="course-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Ders Kodu</th>
+                                            <th>Ders Adı</th>
+                                            <th>AKTS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>AIT102</td><td>Atatürk İlkeleri ve İnkilap Tarihi II (UE)</td><td>2</td></tr>
+                                        <tr><td>YDB106</td><td>İngilizce II (UE)</td><td>2</td></tr>
+                                        <tr><td>KYP102</td><td>Kariyer Planlama (UE)</td><td>0</td></tr>
+                                        <tr><td>TDB108</td><td>Türk Dili II (UE)</td><td>2</td></tr>
+                                        <tr><td>BUE112</td><td>Grafik Animasyon I UE</td><td>5</td></tr>
+                                        <tr><td>BUE110</td><td>Matematik II UE</td><td>4</td></tr>
+                                        <tr><td>BUE116</td><td>Temel Bilgisayar Donanımı UE</td><td>5</td></tr>
+                                        <tr><td>BUE114</td><td>Veri Yapıları ve Programlama UE</td><td>6</td></tr>
+                                        <tr><td></td><td>Seçmeli Dersler</td><td>4</td></tr>
+                                        <tr class="font-bold text-gray-800"><td></td><td>AKTS Toplamı</td><td>30</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-2">3. Yarıyıl</h4>
+                            <div class="table-container">
+                                <table class="course-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Ders Kodu</th>
+                                            <th>Ders Adı</th>
+                                            <th>AKTS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>EDO299</td><td>Staj (Yıllık Ders 3+3 AKTS)</td><td>3</td></tr>
+                                        <tr><td>BUE201</td><td>Grafik Animasyon II (UE)</td><td>3</td></tr>
+                                        <tr><td>BUE203</td><td>İnternet Programcılığı I (UE)</td><td>4</td></tr>
+                                        <tr><td>BUE205</td><td>Programlama Dilleri I (UE)</td><td>4</td></tr>
+                                        <tr><td>BUE207</td><td>Veri Tabanı Yönetim Sistemleri I (UE)</td><td>4</td></tr>
+                                        <tr><td></td><td>Seçmeli Dersler</td><td>12</td></tr>
+                                        <tr class="font-bold text-gray-800"><td></td><td>AKTS Toplamı</td><td>30</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-2">4. Yarıyıl</h4>
+                            <div class="table-container">
+                                <table class="course-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Ders Kodu</th>
+                                            <th>Ders Adı</th>
+                                            <th>AKTS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>BUE231</td><td>İnternet Programcılığı II (UE)</td><td>4</td></tr>
+                                        <tr><td>BUE232</td><td>Programlama Dilleri II (UE)</td><td>4</td></tr>
+                                        <tr><td>BUE230</td><td>Proje (UE)</td><td>3</td></tr>
+                                        <tr><td>BUE233</td><td>Veri Tabanı Yönetim Sistemleri II (UE)</td><td>4</td></tr>
+                                        <tr><td></td><td>Seçmeli Dersler</td><td>12</td></tr>
+                                        <tr class="font-bold text-gray-800"><td></td><td>AKTS Toplamı</td><td>30</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Akademik Kadro Bölümü -->
+        <section id="kadro" class="bg-gray-200">
+            <h2 class="section-title">Akademik Kadromuz</h2>
+            <div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="card flex flex-col items-center">
+                    <img src="https://images.pexels.com/photos/159516/person-teacher-man-lecturer-159516.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Öğr. Gör. Dr. Mustafa OF" class="rounded-full w-36 h-36 mb-4 border-4 border-blue-600">
+                    <h3 class="text-xl font-semibold text-gray-800">Öğr. Gör. Dr. Mustafa OF</h3>
+                    <p class="text-gray-600">Bölüm Başkanı</p>
+                    <a href="mailto:mustafaof@kocaeli.edu.tr" class="text-blue-600 hover:underline">mustafaof@kocaeli.edu.tr</a>
+                </div>
+                <div class="card flex flex-col items-center">
+                    <img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Öğr. Gör. Burak ÇAKIR" class="rounded-full w-36 h-36 mb-4 border-4 border-green-600">
+                    <h3 class="text-xl font-semibold text-gray-800">Öğr. Gör. Burak ÇAKIR</h3>
+                    <p class="text-gray-600">Öğretim Görevlisi</p>
+                    <a href="mailto:burak@kocaeli.edu.tr" class="text-green-600 hover:underline">burak@kocaeli.edu.tr</a>
+                </div>
+                <div class="card flex flex-col items-center">
+                    <img src="https://images.pexels.com/photos/414171/pexels-photo-414171.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Öğr. Gör. Nevin Pamuk" class="rounded-full w-36 h-36 mb-4 border-4 border-purple-600">
+                    <h3 class="text-xl font-semibold text-gray-800">Öğr. Gör. Nevin Pamuk</h3>
+                    <p class="text-gray-600">Öğretim Görevlisi</p>
+                    <a href="mailto:npamuk@kocaeli.edu.tr" class="text-purple-600 hover:underline">npamuk@kocaeli.edu.tr</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Laboratuvarlar Bölümü -->
+        <section id="laboratuvarlar" class="bg-gray-100">
+            <h2 class="section-title">Laboratuvarlarımız</h2>
+            <div class="w-full max-w-4xl flex flex-col md:flex-row items-center justify-center gap-8">
+                <div class="card text-center flex-1">
+                    <h3 class="text-2xl font-bold text-cyan-600 mb-2">Bilgisayar Lab-IV</h3>
+                    <p class="text-gray-600">35 adet bilgisayar ile donatılmış etkin bir laboratuvar.</p>
+                </div>
+                <div class="card text-center flex-1">
+                    <h3 class="text-2xl font-bold text-fuchsia-600 mb-2">Bilgisayar Lab-V</h3>
+                    <p class="text-gray-600">40 adet bilgisayar ile geniş bir çalışma alanı sunar.</p>
+                </div>
+            </div>
+            <div class="mt-12 w-full max-w-6xl text-center">
+                <img src="https://images.pexels.com/photos/10895311/pexels-photo-10895311.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Bilgisayar laboratuvarı görseli" class="rounded-xl shadow-2xl mx-auto">
+            </div>
+        </section>
+
+        <!-- İletişim Bölümü -->
+        <section id="iletisim" class="bg-gray-200">
+            <h2 class="section-title">İletişim</h2>
+            <div class="card w-full max-w-2xl text-center">
+                <p class="text-gray-600 mb-4">Aklınızdaki soruları yanıtlamak ve daha fazla bilgi sağlamak için buradayız. Bizimle aşağıdaki kanallardan iletişime geçebilirsiniz.</p>
+                <div class="space-y-4 text-left">
+                    <p class="text-lg text-gray-700 font-semibold flex items-center"><span class="mr-2 text-2xl text-blue-600">📍</span>Kocaeli Üniversitesi Kocaeli Meslek Yüksekokulu</p>
+                    <p class="text-lg text-gray-700 font-semibold flex items-center"><span class="mr-2 text-2xl text-blue-600">📞</span>+90 262 349 43 51 / +90 262 349 39 97</p>
+                    <p class="text-lg text-gray-700 font-semibold flex items-center"><span class="mr-2 text-2xl text-blue-600">📧</span><a href="mailto:mustafaof@kocaeli.edu.tr" class="hover:underline">mustafaof@kocaeli.edu.tr</a></p>
+                    <p class="text-lg text-gray-700 font-semibold flex items-center"><span class="mr-2 text-2xl text-blue-600">🌐</span><a href="https://kmyo.kocaeli.edu.tr" target="_blank" class="hover:underline">kmyo.kocaeli.edu.tr</a></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-200 text-center py-6 mt-12">
+        <p class="text-gray-500 text-sm">© 2024 Kocaeli MYO Bilgisayar Teknolojileri Bölümü. Tüm hakları saklıdır.</p>
+    </footer>
+    <script>
+        function toggleMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const isOpen = mobileMenu.classList.contains('active');
+            if (isOpen) {
+                mobileMenu.classList.remove('active');
+            } else {
+                mobileMenu.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
